@@ -1,0 +1,104 @@
+html {
+  font-size: 100%;
+}
+
+/* =========================
+   MODO ALTO CONTRASTE
+========================= */
+
+body.alto-contraste {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.alto-contraste a {
+  color: #ffff00 !important;
+  text-decoration: underline;
+}
+
+/* Tabelas */
+body.alto-contraste table {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.alto-contraste th,
+body.alto-contraste td {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+/* Linhas alternadas (Bootstrap) */
+body.alto-contraste .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #111 !important;
+}
+
+/* Cabeçalho da tabela */
+body.alto-contraste thead th {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* =========================
+   PAINEL DE ACESSIBILIDADE
+========================= */
+
+.painel-acessibilidade {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Botões redondos */
+.btn-acessibilidade {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+  border: none;
+
+  background-color: #212529;
+  color: #fff;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover */
+.btn-acessibilidade:hover {
+  transform: scale(1.1);
+  background-color: #000;
+}
+
+/* Foco acessível (teclado) */
+.btn-acessibilidade:focus {
+  outline: 3px solid #ffff00;
+  outline-offset: 2px;
+}
+
+/* Botão contraste */
+.btn-acessibilidade.contraste {
+  background-color: #ffc107;
+  color: #000;
+}
+
+/* Botão reset */
+.btn-acessibilidade.reset {
+  background-color: #6c757d;
+}

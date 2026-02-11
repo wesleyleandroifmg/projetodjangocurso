@@ -1,0 +1,21 @@
+{% extends "../core/base.html" %}
+
+{% block title %}Produtos{% endblock %}
+{% block content %}
+  <h1 class="mb-4">Bem-vindo! a página de produtos!</h1>
+  <p>Veja a lista com todos os nossos produtos</p>
+  {% if itens %}
+    <table class="table table-bordered table-striped">
+      <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Ações</th></tr>
+      {% for item in itens %}
+
+      <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td><a href="{% url 'produtos:detalhe' item.id %}" class="btn btn-primary">Acessar</a></td></tr>
+
+      {% endfor %}
+    </table>
+  {% else %}
+    <p><strong>Nenhum produto encontrado</strong></p>
+  {% endif %}
+  <br />
+
+{% endblock %}

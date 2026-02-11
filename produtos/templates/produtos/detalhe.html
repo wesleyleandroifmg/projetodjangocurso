@@ -1,0 +1,17 @@
+{% extends "../core/base.html" %}
+
+{% block title %}Detalhes do Produto{% endblock %}
+{% block content %}
+    <h2>Detalhes do Produto</h2>
+
+    {% if produto %}
+    <p>ID: {{ produto.id }}</p>
+    <p>Nome: {{ produto.nome }}</p>
+    <p>Preço: R$ {{ produto.preco }}</p>
+    {% else %}
+    <p>Produto não encontrado</p>
+    {% endif %}
+
+    <a href="{% url 'produtos:lista' %}">Voltar</a>
+
+{% endblock %}
