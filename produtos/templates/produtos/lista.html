@@ -11,7 +11,10 @@
       <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Ações</th></tr>
       {% for item in itens %}
 
-      <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td><a href="{% url 'produtos:detalhe' item.id %}" class="btn btn-primary">Acessar</a></td></tr>
+      <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td>
+        <a href="{% url 'produtos:detalhe' item.id %}" class="btn btn-primary">Acessar</a>
+        <a href="{% url 'produtos:editar_produto' item.id %}" class="btn btn-warning">Editar</a>
+      </td></tr>
 
       {% endfor %}
     </table>

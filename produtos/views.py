@@ -37,7 +37,32 @@ def inserir_produto(request):
         form = ProdutoForm() # Se o método da requisição não for POST, cria uma instância vazia do formulário para exibir ao usuário
 
     # Renderiza o template 'criar_produto.html' com o formulário para criar um novo produto
-    return render(request, "produtos/produtoForm.html", {"form": form}) 
+    return render(request, "produtos/produtoForm.html", {"form": form})
+
+def editar_produto(request, id):
+
+    # Busca o objeto no banco, se não encontrar, retorna 404 (página não encontrada)
+    post = get_object_or_404(Produto, pk=id)
+
+    # Se for POST, atualiza o objeto, só que agora, ao invés de criar um novo, liga o formulário ao objeto existente usando o parâmetro instance
+    if request.method == "POST":
+        
+        # Cria o formulário com os dados enviados
+        # e liga ao objeto existente
+        form = ProdutoForm(request.POST, instance=post)
+
+        if form.is_valid():
+            # Atualiza o objeto existente
+            form.save()
+            # Redireciona para a página de detalhes do produto editado
+            return redirect("produtos:detalhe", pk=id)
+
+    else:
+        # Se for GET, apenas mostra os dados já preenchidos
+        form = ProdutoForm(instance=post)
+
+    return render(request, "produtos/produtoForm.html", {"form": form})
+
 
 def inserir_categoria(request):
     if request.method == "POST":
