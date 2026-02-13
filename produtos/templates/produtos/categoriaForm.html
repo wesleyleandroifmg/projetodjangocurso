@@ -1,0 +1,36 @@
+{% extends "../core/base.html" %}
+
+{% block title %}Inserir Categoria{% endblock %}
+{% block content %}
+    <h3>Inserir Categoria</h3>
+    <form method="post" class="container">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-3 col-form-label">
+                    {{ field.label }}
+                </label>
+                <div class="col-sm-9">
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-success">
+                    Salvar
+                </button>
+                <button type="button" class="btn btn-primary" onclick="history.back()">
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

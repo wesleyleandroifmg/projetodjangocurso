@@ -4,6 +4,8 @@
 {% block content %}
   <h1 class="mb-4">Bem-vindo! a página de produtos!</h1>
   <p>Veja a lista com todos os nossos produtos</p>
+  <a href="{% url 'produtos:inserir_produto' %}" class="btn btn-success mb-3">Inserir Produto</a>
+  <a href="{% url 'produtos:inserir_categoria' %}" class="btn btn-secondary mb-3">Inserir Categoria</a>
   {% if itens %}
     <table class="table table-bordered table-striped">
       <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Ações</th></tr>
