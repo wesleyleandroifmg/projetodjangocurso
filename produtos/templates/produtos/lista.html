@@ -22,5 +22,33 @@
     <p><strong>Nenhum produto encontrado</strong></p>
   {% endif %}
   <br />
-
+{% if messages %}
+        <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+        {% for message in messages %}
+        <div class="toast text-bg-success border-0" role="alert">
+            <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endblock content %}
+{% block extra_js %}
+    {% if messages %}
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            toastElList.forEach(function(toastEl) {
+                var toast = new bootstrap.Toast(toastEl, {
+                    delay: 3000
+                });
+                toast.show();
+            });
+        });
+        </script>
+    {% endif %}
 {% endblock %}
