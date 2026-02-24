@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block title %}403 - Permissão Negada{% endblock %}
+
+{% block content %}
+    <div class="container text-center mt-5">
+        <h1 class="text-danger">403 - Permissão Negada</h1>
+        <p>{{ message }}</p>
+
+        <button onclick="history.back()" class="btn btn-secondary">
+            Voltar
+        </button>
+    </div>
+{% endblock %}

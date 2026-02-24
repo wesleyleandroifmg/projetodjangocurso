@@ -80,6 +80,26 @@
                 Contato
                 </a>
             </li>
+            <!--Exibe o link de contato apenas para usuários autenticados -->
+            <!-- Para o logout funcionar no django tem que se usar o form, pois só é aceito o método POST -->
+             <!-- Exibe o link de login ou logout dependendo do estado de autenticação do usuário -->
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-link btn btn-link m-0 align-baseline">
+                            Sair
+                        </button>
+                    </form>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link"
+                    href="{% url 'core:login' %}">
+                    Login
+                    </a>
+                </li>
+            {% endif %}
 
             </ul>
         </div>

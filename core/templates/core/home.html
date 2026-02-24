@@ -4,13 +4,11 @@
 {% block content %}
   <h1 class="mb-4">Bem-vindo! ao curso de Django!</h1>
   <p>Está é a página inicial do nosso projeto Django.</p>
-  <p>Olá {{ nome }}, seja bem-vindo ao curso {{ curso }}!</p>
-  <br />
-  {% if nome %}
-  <p>Usuário logado</p>
-  {% else %}
-  <p>Visitante</p>
+  {% if user.is_authenticated %}
+    <p>Olá, <strong>{{ user.first_name }}!</strong></p>
   {% endif %}
+  <p>Seja bem-vindo ao curso {{ curso }}!</p>
+  <br />
 
   <table class="table table-bordered table-striped">
     {% for item in lista %}
