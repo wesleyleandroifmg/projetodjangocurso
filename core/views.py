@@ -1,6 +1,10 @@
 from urllib import request
-from django.shortcuts import render # render é usado para retornar templates
+from django.shortcuts import render, redirect # render é usado para retornar templates e redirect é usado para redirecionar para outras páginas
 from django.http import HttpResponse # HttpResponse é usado para retornar respostas simples
+from django.core.exceptions import PermissionDenied # Importa a exceção PermissionDenied para lidar com casos de acesso negado
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
 def home(request):
   nome = 'Wesley'
@@ -19,3 +23,17 @@ def contato(request):
 
 def sobre(request):
   return render(request, "core/sobre.html")
+
+def login_view(request):
+  if request.method == "POST":
+    form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        return redirect("core:home")
+    else:
+        messages.error(request, "Usuário ou senha inválidos")
+  else:
+    form = AuthenticationForm()
+
+  return render(request, "core/login.html", {"form": form})

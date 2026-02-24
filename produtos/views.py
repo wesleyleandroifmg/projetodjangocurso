@@ -8,6 +8,7 @@ from django.core.exceptions import PermissionDenied # Importa a exceção Permis
 from .models import Produto, Categoria # Importa o modelo Produto
 from .forms import ProdutoForm, CategoriaForm # Importa os formulários para criar produtos e categorias
 
+
 def lista_produtos(request):
     # Recupera todos os produtos do banco de dados, ordenados por nome
     produtos = Produto.objects.all().order_by('nome')
@@ -28,7 +29,7 @@ def detalhe_produto(request, pk):
 
     return render(request, 'produtos/detalhe.html', context=contexto)
 
-
+@login_required # Decorador para garantir que apenas usuários autenticados possam acessar essa view
 def inserir_produto(request):
 
     # Verifica se o usuário tem a permissão 'app.add_produto', caso contrário, renderiza uma página de erro 403 personalizada
@@ -50,7 +51,7 @@ def inserir_produto(request):
 
 @login_required
 # Decorador para garantir que apenas usuários autenticados possam acessar essa view
-#@permission_required('app.change_produto', raise_exception=True)
+#@permission_required('produtos.change_produto', raise_exception=True)
 def editar_produto(request, id):
 
     # Verifica se o usuário tem a permissão 'app.change_produto', caso contrário, renderiza uma página de erro 403 personalizada
