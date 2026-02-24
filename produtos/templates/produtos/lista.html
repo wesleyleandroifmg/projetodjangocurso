@@ -8,10 +8,10 @@
   <a href="{% url 'produtos:inserir_categoria' %}" class="btn btn-secondary mb-3">Inserir Categoria</a>
   {% if itens %}
     <table class="table table-bordered table-striped">
-      <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Ações</th></tr>
+      <tr><th>ID</th><th>Nome</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
       {% for item in itens %}
 
-      <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td>
+      <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td>{{ item.categoria }}</td><td>
         <a href="{% url 'produtos:detalhe' item.id %}" class="btn btn-primary">Acessar</a>
         <a href="{% url 'produtos:editar_produto' item.id %}" class="btn btn-warning">Editar</a>
       </td></tr>

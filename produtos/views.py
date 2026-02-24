@@ -59,7 +59,7 @@ def editar_produto(request, id):
         return render(request, "core/403.html", {"message": "Você não tem permissão para editar produtos."})
 
     # Busca o objeto no banco, se não encontrar, retorna 404 (página não encontrada)
-    post = get_object_or_404(Produto, pk=id)
+    produto = get_object_or_404(Produto, id=id)
 
     if not request.user.is_staff:
         raise PermissionDenied("Você não tem permissão para editar produtos.")
@@ -69,7 +69,7 @@ def editar_produto(request, id):
         
         # Cria o formulário com os dados enviados
         # e liga ao objeto existente
-        form = ProdutoForm(request.POST, instance=post)
+        form = ProdutoForm(request.POST, instance=produto)
 
         if form.is_valid():
             # Atualiza o objeto existente
@@ -84,7 +84,7 @@ def editar_produto(request, id):
 
     else:
         # Se for GET, apenas mostra os dados já preenchidos
-        form = ProdutoForm(instance=post)
+        form = ProdutoForm(instance=produto)
 
     return render(request, "produtos/produtoForm.html", {"form": form})
 
