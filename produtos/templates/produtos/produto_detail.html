@@ -4,14 +4,14 @@
 {% block content %}
     <h2>Detalhes do Produto</h2>
 
-    {% if produto %}
-    <p>ID: {{ produto.id }}</p>
-    <p>Nome: {{ produto.nome }}</p>
-    <p>Preço: R$ {{ produto.preco }}</p>
+    {% if item %}
+    <p>ID: {{ item.id }}</p>
+    <p>Nome: {{ item.nome }}</p>
+    <p>Preço: R$ {{ item.preco }}</p>
     {% else %}
     <p>Produto não encontrado</p>
     {% endif %}
 
-    <a href="{% url 'produtos:lista' %}">Voltar</a>
+    <a href="{% url 'produtos:produto_list' %}">Voltar</a>
 
 {% endblock %}

@@ -1,8 +1,5 @@
-from urllib import request
 from django.shortcuts import render, redirect # render é usado para retornar templates e redirect é usado para redirecionar para outras páginas
-from django.http import HttpResponse # HttpResponse é usado para retornar respostas simples
-from django.core.exceptions import PermissionDenied # Importa a exceção PermissionDenied para lidar com casos de acesso negado
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 

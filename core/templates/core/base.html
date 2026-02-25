@@ -62,7 +62,7 @@
 
             <li class="nav-item">
                 <a class="nav-link"
-                href="{% url 'produtos:lista' %}">
+                href="{% url 'produtos:produto_list' %}">
                 Produtos
                 </a>
             </li>
@@ -94,10 +94,7 @@
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link"
-                    href="{% url 'core:login' %}">
-                    Login
-                    </a>
+                    <a class="nav-link" href="{% url 'core:login' %}">Login</a>
                 </li>
             {% endif %}
 
@@ -145,7 +142,7 @@
 
             <ul class="list-unstyled">
             <li><a href="{% url 'core:home' %}" class="text-white-50">Home</a></li>
-            <li><a href="{% url 'produtos:lista' %}" class="text-white-50">Produtos</a></li>
+            <li><a href="{% url 'produtos:produto_list' %}" class="text-white-50">Produtos</a></li>
             <li><a href="{% url 'core:sobre' %}" class="text-white-50">Sobre</a></li>
             <li><a href="{% url 'core:contato' %}" class="text-white-50">Contato</a></li>
             </ul>

@@ -3,11 +3,19 @@ from . import views
 
 app_name = 'produtos'
 
+'''
 urlpatterns = [
-  path('', views.lista_produtos, name='lista'),
-  path("<int:pk>/", views.detalhe_produto, name='detalhe'),
-  path('novo/', views.inserir_produto, name='inserir_produto'),
-  path('editar/<int:id>/', views.editar_produto, name='editar_produto'),
-  path('categorias/nova/', views.inserir_categoria, name='inserir_categoria'),
+  path('', views.listar_produtos, name='produto_list'),
+  path("<int:pk>/", views.detalhe_produto, name='produto_detail'),
+  path('novo/', views.inserir_produto, name='produto_create'),
+  path('editar/<int:id>/', views.editar_produto, name='produto_update'),
+]
+'''
 
+urlpatterns = [
+    path('', views.ProdutoListView.as_view(), name="produto_list"),
+    path("<int:pk>/", views.ProdutoDetailView.as_view(), name="produto_detail"),
+    path("novo/", views.ProdutoCreateView.as_view(), name="produto_create"),
+    path("<int:pk>/editar/", views.ProdutoUpdateView.as_view(), name="produto_update"),
+    path("<int:pk>/excluir/", views.ProdutoDeleteView.as_view(), name="produto_delete"),
 ]
