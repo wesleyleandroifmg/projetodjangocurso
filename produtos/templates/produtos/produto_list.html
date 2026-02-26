@@ -13,6 +13,7 @@
       <tr><td>{{ item.id }}</td><td>{{ item.nome }}</td><td>{{ item.preco }}</td><td>{{ item.categoria }}</td><td>
         <a href="{% url 'produtos:produto_detail' item.id %}" class="btn btn-primary">Acessar</a>
         <a href="{% url 'produtos:produto_update' item.id %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'produtos:produto_delete' item.id %}" class="btn btn-danger">Excluir</a>
       </td></tr>
 
       {% endfor %}
