@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+# Importa timedelta para configurar a duração dos tokens JWT
+from datetime import timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,8 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!kf_cc5civg%u*m+dr7)h@rf1h0qy8qijke40#b*i_s7b(zq1p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True # Coloque True se tiver em ambiente de desenvolvimento, e False em produção
 
+# Permitir apenas localhost e 127.0.0.1 que são usados para desenvolvimento. 
+# Em produção, adicione o domínio do seu site aqui.
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'produtos',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -116,9 +122,48 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/' # URL para acessar os arquivos estáticos
+STATICFILES_DIRS = [BASE_DIR / "static"] # Diretórios onde o Django irá procurar por arquivos estáticos durante o desenvolvimento
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Login e logout
 LOGIN_URL = 'core:login'
 LOGIN_REDIRECT_URL = 'core:home'
 LOGOUT_REDIRECT_URL = 'core:login'
+
+# Configurações para Django REST Framework
+# Em ambiente de desenvolvimento, habilitamos o renderizador de API navegável para facilitar os testes.
+if DEBUG:
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+            'rest_framework.renderers.BrowsableAPIRenderer',
+        ),
+    }
+else: # Em produção, desabilitamos o renderizador de API navegável por questões de segurança e performance.
+    REST_FRAMEWORK = {
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
+        ),
+    }
+
+# Configurações para JWT (JSON Web Tokens) usando Simple JWT
+# Definimos as classes de autenticação e permissão padrão para a API, 
+# garantindo que apenas usuários autenticados possam acessar os endpoints protegidos.
+# Em ambiente de desenvolvimento, o renderizador de API navegável é habilitado para facilitar os testes, 
+# mas em produção ele é desabilitado por questões de segurança e performance.
+# Configuração global que exige que toda a API seja acessada apenas por usuários autenticados usando JWT.
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+# Configurações para a duração dos tokens JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}

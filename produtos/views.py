@@ -24,6 +24,12 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 # Importa reverse_lazy para usar em views baseadas em classe para redirecionar após criar, atualizar ou deletar um produto
 from django.urls import reverse_lazy
 
+#importações para funcionamento da API
+from rest_framework import viewsets # Importa viewsets para criar uma viewset para a API de produtos, que fornece ações padrão para listar, criar, atualizar e deletar produtos
+from .serializers import ProdutoSerializer # Importa o serializer para o modelo Produto, que define como os dados do produto serão convertidos para JSON e vice-versa
+# Importa IsAuthenticatedOrReadOnly para usar como permissão na API, permitindo que usuários autenticados possam criar, atualizar e deletar produtos, enquanto usuários não autenticados podem apenas ler os produtos
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 # Sobrescreve o método handle_no_permission para personalizar o comportamento quando um usuário autenticado sem permissão tenta acessar a view
 class CustomPermissionMixin(PermissionRequiredMixin):
     def handle_no_permission(self):
@@ -75,6 +81,14 @@ class ProdutoDeleteView(LoginRequiredMixin, CustomPermissionMixin, DeleteView):
     def form_valid(self, form):
         messages.success(self.request, "Produto deletado com sucesso!")
         return super().form_valid(form)
+    
+# Views para funcionamento da API usando Django REST Framework
+class ProdutoViewSet(viewsets.ModelViewSet):
+    queryset = Produto.objects.all()
+    serializer_class = ProdutoSerializer
+    # Permissão que permite que usuários autenticados possam criar, atualizar e deletar produtos, 
+    # enquanto usuários não autenticados podem apenas ler os produtos
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 
