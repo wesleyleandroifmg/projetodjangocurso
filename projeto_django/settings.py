@@ -15,6 +15,9 @@ from pathlib import Path
 # Importa timedelta para configurar a duração dos tokens JWT
 from datetime import timedelta
 
+import dj_database_url
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,12 +84,30 @@ WSGI_APPLICATION = 'projeto_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Configuração Padrão (Local)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Se estiver em produção, substitui pelo banco de produção automaticamente
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+if db_from_env:
+    DATABASES['default'].update(db_from_env)
+
+# Verifica se existe a variável DATABASE_URL (configurada automaticamente pelo Heroku)
+if os.getenv('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
+    )
+    
+    # Ajuste específico para o erro de SSL do Heroku/Postgres
+    DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
 
 
 # Password validation
