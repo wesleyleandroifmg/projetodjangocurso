@@ -33,7 +33,7 @@ DEBUG = True # Coloque True se tiver em ambiente de desenvolvimento, e False em 
 
 # Permitir apenas localhost e 127.0.0.1 que são usados para desenvolvimento. 
 # Em produção, adicione o domínio do seu site aqui.
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", 'projetodjangocurso.onrender.com']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost",'projetodjangocurso.onrender.com']
 
 
 # Application definition

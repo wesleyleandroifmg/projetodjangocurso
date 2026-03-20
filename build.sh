@@ -7,3 +7,6 @@ pip install -r requirements.txt # Instala o Django e todas as bibliotecas necess
 python manage.py collectstatic --no-input
 # Atualiza o banco de dados PostgreSQL do Render com as tabelas do seu projeto automaticamente.
 python manage.py migrate
+
+# Linha mágica para o plano Free:
+python setup_admin.py
