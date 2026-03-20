@@ -1,0 +1,17 @@
+# Ambientes Virtuais
+.venv/
+
+# Python (Arquivos temporários)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Banco de Dados Local (IMPORTANTE)
+db.sqlite3
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+
+# Pasta de arquivos estáticos gerada no deploy
+staticfiles/
