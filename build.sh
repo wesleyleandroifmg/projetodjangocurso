@@ -9,4 +9,4 @@ python manage.py collectstatic --no-input
 python manage.py migrate
 
 # Linha mágica para o plano Free:
-python setup_admin.py
+python setup_admin.py || true
